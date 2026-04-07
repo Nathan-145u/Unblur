@@ -56,8 +56,19 @@ final class TranscriptionService {
             inFlight[episode.id] = nil
             try? context.save()
         } catch {
-            let msg = (error as NSError).localizedDescription
+            let nsErr = error as NSError
             NSLog("[Unblur] Transcription failed for \(episode.title): \(error)")
+            let msg: String
+            // kLSRErrorDomain Code=201 means Siri/Dictation is disabled at the OS level.
+            if nsErr.domain == "kLSRErrorDomain" && nsErr.code == 201 {
+                #if os(macOS)
+                msg = "Speech recognition needs Dictation enabled. Open System Settings → Keyboard, turn on \"Dictation\", then click Retry."
+                #else
+                msg = "Speech recognition needs Dictation enabled. Open Settings → General → Keyboard → Enable Dictation, then click Retry."
+                #endif
+            } else {
+                msg = nsErr.localizedDescription
+            }
             episode.transcriptionStatus = "failed"
             inFlight[episode.id] = nil
             lastError[episode.id] = msg

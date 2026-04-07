@@ -36,6 +36,15 @@ final class AudioPlayerManager {
         // Save position of previous episode
         savePosition()
 
+        // Tear down previous player BEFORE replacing it. removeTimeObserver
+        // must be called on the same AVPlayer instance the observer was added to.
+        if let observer = timeObserver, let oldPlayer = player {
+            oldPlayer.removeTimeObserver(observer)
+        }
+        timeObserver = nil
+        player?.pause()
+        player = nil
+
         guard let url = episode.localAudioURL else { return }
         currentEpisode = episode
 
@@ -44,7 +53,6 @@ final class AudioPlayerManager {
         p.rate = 0
         player = p
 
-        if let observer = timeObserver { p.removeTimeObserver(observer) }
         timeObserver = p.addPeriodicTimeObserver(
             forInterval: CMTime(seconds: 0.25, preferredTimescale: 600),
             queue: .main
