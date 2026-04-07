@@ -39,15 +39,15 @@ struct FullPlayerView: View {
                 }
                 .padding()
                 .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
+                    ToolbarItem(placement: .cancellationAction) {
                         Button("Done") { dismiss() }
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .primaryAction) {
                         Button { showSubtitles.toggle() } label: {
                             Image(systemName: showSubtitles ? "captions.bubble.fill" : "captions.bubble")
                         }
                     }
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItem(placement: .primaryAction) {
                         Button { showChat = true } label: {
                             Image(systemName: "sparkles")
                         }

@@ -68,7 +68,7 @@ struct StorageView: View {
             }
             .navigationTitle("Storage")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button("Done") { dismiss() }
                 }
             }

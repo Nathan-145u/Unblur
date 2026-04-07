@@ -15,7 +15,9 @@ struct SettingsView: View {
             Form {
                 Section {
                     SecureField("sk-ant-…", text: $apiKey)
+                        #if os(iOS)
                         .textInputAutocapitalization(.never)
+                        #endif
                         .autocorrectionDisabled()
                     Button("Save") {
                         KeychainHelper.set(apiKey, for: SecretKey.claudeAPIKey)
@@ -41,7 +43,7 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button("Done") { dismiss() }
                 }
             }

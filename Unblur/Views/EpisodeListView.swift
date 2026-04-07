@@ -44,13 +44,13 @@ struct EpisodeListView: View {
             }
             .navigationTitle("Unblur")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button { showStorage = true } label: { Image(systemName: "internaldrive") }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button { showSettings = true } label: { Image(systemName: "gearshape") }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .primaryAction) {
                     Button {
                         Task { await refresh() }
                     } label: {

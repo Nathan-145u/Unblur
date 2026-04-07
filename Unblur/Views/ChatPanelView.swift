@@ -59,7 +59,7 @@ struct ChatPanelView: View {
             }
             .navigationTitle("Ask Claude")
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItem(placement: .cancellationAction) {
                     Button("Done") { dismiss() }
                 }
             }
