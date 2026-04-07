@@ -55,6 +55,14 @@ struct SubtitleScrollView: View {
             } else if episode.transcriptionStatus == "failed" {
                 VStack(spacing: 8) {
                     Text("Transcription failed").foregroundStyle(.secondary)
+                    if let msg = TranscriptionService.shared.lastError[episode.id] {
+                        Text(msg)
+                            .font(.caption)
+                            .foregroundStyle(.red)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal)
+                            .textSelection(.enabled)
+                    }
                     Button("Retry") {
                         Task { await TranscriptionService.shared.transcribe(episode, context: modelContext) }
                     }

@@ -20,6 +20,8 @@ final class TranscriptionService {
 
     /// episodeID → progress 0…1
     private(set) var inFlight: [UUID: Double] = [:]
+    /// episodeID → last error message
+    private(set) var lastError: [UUID: String] = [:]
 
     private var queue: [UUID] = []
     private var isRunning = false
@@ -31,6 +33,7 @@ final class TranscriptionService {
         else { return }
         episode.transcriptionStatus = "running"
         inFlight[episode.id] = 0
+        lastError[episode.id] = nil
         try? context.save()
 
         do {
@@ -53,8 +56,11 @@ final class TranscriptionService {
             inFlight[episode.id] = nil
             try? context.save()
         } catch {
+            let msg = (error as NSError).localizedDescription
+            NSLog("[Unblur] Transcription failed for \(episode.title): \(error)")
             episode.transcriptionStatus = "failed"
             inFlight[episode.id] = nil
+            lastError[episode.id] = msg
             try? context.save()
         }
     }
@@ -78,31 +84,92 @@ final class TranscriptionService {
         var wordTimingsJSON: String?
     }
 
-    /// Backend stub. Uses SFSpeechRecognizer with `requiresOnDeviceRecognition`.
-    /// Returns sentence-level segments with embedded word timings.
+    /// Backend stub. Decodes the local audio file with AVAssetReader (handles MP3
+    /// and other compressed formats) and feeds PCM buffers into a buffer-based
+    /// SFSpeech request. This bypasses the ~1-minute limit of the URL-based
+    /// request and works with arbitrary input formats. Requires on-device
+    /// recognition support.
     private func runRecognition(for episode: Episode) async throws -> [Segment] {
         guard let url = episode.localAudioURL else { return [] }
-        guard let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")),
-              recognizer.isAvailable
-        else {
-            throw NSError(domain: "Unblur.Transcription", code: 2,
-                          userInfo: [NSLocalizedDescriptionKey: "Recognizer unavailable"])
+        guard let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US")) else {
+            throw err("Speech recognizer unavailable for en-US")
+        }
+        guard recognizer.isAvailable else {
+            throw err("Speech recognizer is not currently available")
+        }
+        guard recognizer.supportsOnDeviceRecognition else {
+            throw err("On-device speech recognition is not available on this device. Open System Settings → General → Language & Region and ensure English is added so the on-device model can download.")
         }
 
-        let request = SFSpeechURLRecognitionRequest(url: url)
+        let asset = AVURLAsset(url: url)
+        let reader: AVAssetReader
+        do {
+            reader = try AVAssetReader(asset: asset)
+        } catch {
+            throw err("Failed to open audio file: \(error.localizedDescription)")
+        }
+
+        let tracks = try await asset.loadTracks(withMediaType: .audio)
+        guard let audioTrack = tracks.first else {
+            throw err("No audio track in file")
+        }
+
+        // Decode to 16 kHz mono PCM Int16 (Speech accepts this readily).
+        let outputSettings: [String: Any] = [
+            AVFormatIDKey: kAudioFormatLinearPCM,
+            AVSampleRateKey: 16_000,
+            AVNumberOfChannelsKey: 1,
+            AVLinearPCMBitDepthKey: 16,
+            AVLinearPCMIsFloatKey: false,
+            AVLinearPCMIsBigEndianKey: false,
+            AVLinearPCMIsNonInterleaved: false
+        ]
+        let trackOutput = AVAssetReaderTrackOutput(track: audioTrack, outputSettings: outputSettings)
+        guard reader.canAdd(trackOutput) else { throw err("Cannot read audio track") }
+        reader.add(trackOutput)
+        guard reader.startReading() else {
+            throw err("Reader failed to start: \(reader.error?.localizedDescription ?? "unknown")")
+        }
+
+        let format = AVAudioFormat(commonFormat: .pcmFormatInt16,
+                                   sampleRate: 16_000,
+                                   channels: 1,
+                                   interleaved: true)!
+
+        let request = SFSpeechAudioBufferRecognitionRequest()
         request.shouldReportPartialResults = false
-        request.requiresOnDeviceRecognition = recognizer.supportsOnDeviceRecognition
+        request.requiresOnDeviceRecognition = true
+        if #available(macOS 13, iOS 16, *) {
+            request.addsPunctuation = true
+        }
+
+        // Pump PCM buffers into the request. Do this off the main actor.
+        let pumpTask = Task.detached(priority: .userInitiated) {
+            while reader.status == .reading {
+                guard let sample = trackOutput.copyNextSampleBuffer() else { break }
+                if let buffer = Self.pcmBuffer(from: sample, format: format) {
+                    request.append(buffer)
+                }
+                CMSampleBufferInvalidate(sample)
+            }
+            request.endAudio()
+        }
 
         let result: SFSpeechRecognitionResult = try await withCheckedThrowingContinuation { cont in
+            var resumed = false
             recognizer.recognitionTask(with: request) { res, err in
+                if resumed { return }
                 if let err = err {
+                    resumed = true
                     cont.resume(throwing: err); return
                 }
                 if let res = res, res.isFinal {
+                    resumed = true
                     cont.resume(returning: res)
                 }
             }
         }
+        _ = await pumpTask.value
 
         let words: [WordTiming] = result.bestTranscription.segments.map { seg in
             WordTiming(word: seg.substring,
@@ -110,6 +177,30 @@ final class TranscriptionService {
                        end: seg.timestamp + seg.duration)
         }
         return Self.groupIntoSentences(words: words)
+    }
+
+    private func err(_ message: String) -> NSError {
+        NSError(domain: "Unblur.Transcription", code: 1,
+                userInfo: [NSLocalizedDescriptionKey: message])
+    }
+
+    /// Convert a CMSampleBuffer of Int16 PCM into an AVAudioPCMBuffer matching `format`.
+    nonisolated static func pcmBuffer(from sample: CMSampleBuffer,
+                                      format: AVAudioFormat) -> AVAudioPCMBuffer? {
+        guard let blockBuffer = CMSampleBufferGetDataBuffer(sample) else { return nil }
+        let length = CMBlockBufferGetDataLength(blockBuffer)
+        let frames = AVAudioFrameCount(length / MemoryLayout<Int16>.size)
+        guard let pcmBuffer = AVAudioPCMBuffer(pcmFormat: format, frameCapacity: frames) else {
+            return nil
+        }
+        pcmBuffer.frameLength = frames
+        guard let dest = pcmBuffer.int16ChannelData?[0] else { return nil }
+        var status: OSStatus = noErr
+        status = CMBlockBufferCopyDataBytes(blockBuffer,
+                                            atOffset: 0,
+                                            dataLength: length,
+                                            destination: dest)
+        return status == noErr ? pcmBuffer : nil
     }
 
     /// Splits the flat word stream into sentences using punctuation and pauses.
