@@ -46,6 +46,10 @@
 - Status: done
 - Files: `ios/UnblurTests/EpisodeDTOTests.swift`, `ios/UnblurTests/EpisodeRepositoryTests.swift`, `ios/UnblurTests/EpisodeListViewModelTests.swift`, `maestro/002-episode-list.yaml`
 - Done Definition: XCTest unit tests pass — DTO decoding (valid/missing fields), Repository pagination cursor logic (mock), ViewModel state transitions (loading/success/error/pagination). Maestro E2E test passes — app launches, list loads, scroll triggers next page, pull-to-refresh updates list.
+- Test Results:
+  - Unit tests: 9/9 passing (EpisodeDTOTests: 5, EpisodeListViewModelTests: 4)
+  - E2E tests: 1/1 passing (maestro/002-episode-list.yaml)
+  - Manual testing: done (2026-04-13) — app launches, episodes load from Supabase, infinite scroll works, pull-to-refresh triggers sync-rss and reloads, error/empty/offline states verified on simulator. Known issue: app feels laggy/stuttery, needs performance investigation.
 - Dependencies: T010
 - Manual Intervention: none
 
