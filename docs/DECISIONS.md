@@ -248,3 +248,42 @@
 - **Grok 4.1 ($0.20/$0.50):** Chinese language support is weakest among candidates. Not suitable for this use case.
 
 **Future plan:** When subscription is added (v0.5+), upgrade Q&A to a stronger model (Claude Sonnet or similar) for paying users. DeepSeek remains as the free tier fallback.
+
+---
+
+## ADR-009: Credential Management — Root .env + sync-env.sh
+
+**Status:** Accepted
+**Date:** 2026-04-13
+
+**Context:** Monorepo has three components (iOS, Web Admin, Edge Functions) that share credentials (Supabase URL, anon key). Each component reads config in a different format: iOS uses `.xcconfig` → Info.plist, Next.js uses `.env.local`, Edge Functions use platform-injected env vars. Need a single source of truth for local development credentials.
+
+**Decision:** Root `.env` file as single source of truth, with `scripts/sync-env.sh` that generates component-specific config files.
+
+**Flow:**
+```
+.env (single source, gitignored)
+  ├── sync-env.sh → ios/Unblur/Config/Secrets.xcconfig
+  └── sync-env.sh → admin/.env.local (when Web Admin is added)
+```
+
+**Automation:**
+- iOS: Xcode Build Phase "Run Script" executes `sync-env.sh` before compilation
+- Web Admin: `prebuild` npm script executes `sync-env.sh`
+- Developer only needs to maintain one `.env` file
+
+**Pros:**
+- Single file to manage — no hunting across subdirectories
+- Generated config files are gitignored — no risk of committing secrets
+- Adding a new component or credential only requires updating one file + the script
+- Build-time automation means developers don't need to remember to run the script manually
+
+**Cons:**
+- Extra indirection — developers must understand the sync flow when debugging config issues
+- Script maintenance — new config formats require updating `sync-env.sh`
+- Edge Functions don't benefit (credentials are set in Supabase Dashboard, not local files)
+
+**Alternatives considered:**
+- **Separate config files per component (.xcconfig, .env.local):** Simpler per-component but credentials duplicated across files. Easy to update one and forget another.
+- **iOS reads .env directly at runtime:** Not possible — iOS apps can only read bundled resources and Info.plist at runtime.
+- **Xcode .xcconfig only (no root .env):** Works for iOS-only phase, but doesn't scale when Web Admin is added. Would require a second credentials file.
