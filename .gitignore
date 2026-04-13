@@ -1,0 +1,25 @@
+# Environment
+.env
+.env.local
+
+# iOS generated config
+ios/Unblur/Config/Secrets.swift
+ios/Unblur/Config/Secrets.xcconfig
+
+# Xcode
+*.xcuserdata
+xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# macOS
+.DS_Store
+
+# Web Admin (future)
+admin/.env.local
+admin/node_modules/

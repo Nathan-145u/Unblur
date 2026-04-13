@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		BB0001012F8C0001005F1CA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67A074312F83D2BF005F1CA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67A074382F83D2BF005F1CA3;
+			remoteInfo = Unblur;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		67A074392F83D2BF005F1CA3 /* Unblur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unblur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB0002012F8C0001005F1CA3 /* UnblurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnblurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = Unblur;
 			sourceTree = "<group>";
 		};
+		BB0003012F8C0001005F1CA3 /* UnblurTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UnblurTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		67A074362F83D2BF005F1CA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BB0004012F8C0001005F1CA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				67A0743B2F83D2BF005F1CA3 /* Unblur */,
+				BB0003012F8C0001005F1CA3 /* UnblurTests */,
 				67A0743A2F83D2BF005F1CA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				67A074392F83D2BF005F1CA3 /* Unblur.app */,
+				BB0002012F8C0001005F1CA3 /* UnblurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,6 +77,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67A074462F83D2C1005F1CA3 /* Build configuration list for PBXNativeTarget "Unblur" */;
 			buildPhases = (
+				AA0002012F8C0001005F1CA3 /* Sync Env */,
 				67A074352F83D2BF005F1CA3 /* Sources */,
 				67A074362F83D2BF005F1CA3 /* Frameworks */,
 				67A074372F83D2BF005F1CA3 /* Resources */,
@@ -65,10 +91,34 @@
 			);
 			name = Unblur;
 			packageProductDependencies = (
+				AA0003012F8C0001005F1CA3 /* Supabase */,
 			);
 			productName = Unblur;
 			productReference = 67A074392F83D2BF005F1CA3 /* Unblur.app */;
 			productType = "com.apple.product-type.application";
+		};
+		BB0005012F8C0001005F1CA3 /* UnblurTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BB0009012F8C0001005F1CA3 /* Build configuration list for PBXNativeTarget "UnblurTests" */;
+			buildPhases = (
+				BB0006012F8C0001005F1CA3 /* Sources */,
+				BB0004012F8C0001005F1CA3 /* Frameworks */,
+				BB0007012F8C0001005F1CA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BB0008012F8C0001005F1CA3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BB0003012F8C0001005F1CA3 /* UnblurTests */,
+			);
+			name = UnblurTests;
+			packageProductDependencies = (
+			);
+			productName = UnblurTests;
+			productReference = BB0002012F8C0001005F1CA3 /* UnblurTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +133,10 @@
 					67A074382F83D2BF005F1CA3 = {
 						CreatedOnToolsVersion = 26.3;
 					};
+					BB0005012F8C0001005F1CA3 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 67A074382F83D2BF005F1CA3;
+					};
 				};
 			};
 			buildConfigurationList = 67A074342F83D2BF005F1CA3 /* Build configuration list for PBXProject "Unblur" */;
@@ -94,12 +148,16 @@
 			);
 			mainGroup = 67A074302F83D2BF005F1CA3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AA0004012F8C0001005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67A0743A2F83D2BF005F1CA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				67A074382F83D2BF005F1CA3 /* Unblur */,
+				BB0005012F8C0001005F1CA3 /* UnblurTests */,
 			);
 		};
 /* End PBXProject section */
@@ -112,7 +170,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BB0007012F8C0001005F1CA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		AA0002012F8C0001005F1CA3 /* Sync Env */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../.env",
+				"$(SRCROOT)/../scripts/sync-env.sh",
+			);
+			name = "Sync Env";
+			outputPaths = (
+				"$(SRCROOT)/Unblur/Config/Secrets.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/../scripts/sync-env.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		67A074352F83D2BF005F1CA3 /* Sources */ = {
@@ -122,7 +207,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BB0006012F8C0001005F1CA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BB0008012F8C0001005F1CA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67A074382F83D2BF005F1CA3 /* Unblur */;
+			targetProxy = BB0001012F8C0001005F1CA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		67A074442F83D2C1005F1CA3 /* Debug */ = {
@@ -163,7 +263,7 @@
 				DEVELOPMENT_TEAM = L277Y76D3W;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -225,7 +325,7 @@
 				DEVELOPMENT_TEAM = L277Y76D3W;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -243,6 +343,7 @@
 		};
 		67A074472F83D2C1005F1CA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -254,6 +355,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -287,6 +389,7 @@
 		};
 		67A074482F83D2C1005F1CA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -298,6 +401,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -329,6 +433,60 @@
 			};
 			name = Release;
 		};
+		BB000A012F8C0001005F1CA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L277Y76D3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.145U.UnblurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unblur.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unblur";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		BB000B012F8C0001005F1CA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L277Y76D3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks @loader_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.145U.UnblurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unblur.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unblur";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -350,7 +508,35 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		BB0009012F8C0001005F1CA3 /* Build configuration list for PBXNativeTarget "UnblurTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BB000A012F8C0001005F1CA3 /* Debug */,
+				BB000B012F8C0001005F1CA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA0004012F8C0001005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA0003012F8C0001005F1CA3 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA0004012F8C0001005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67A074312F83D2BF005F1CA3 /* Project object */;
 }

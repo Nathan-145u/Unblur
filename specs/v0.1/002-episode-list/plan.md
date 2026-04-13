@@ -29,8 +29,8 @@ Add `supabase-swift` SPM package. Create a `SupabaseClient` singleton configured
 ## File Change List
 - Move: `Unblur/` → `ios/Unblur/`
 - Move: `Unblur.xcodeproj/` → `ios/Unblur.xcodeproj/`
-- Add: `ios/Unblur/Config/Supabase.plist` — Supabase URL + anon key (gitignored)
-- Add: `ios/Unblur/Config/Supabase.plist.example` — template without real values (committed)
+- Add: `ios/Unblur/Config/Secrets.swift` — generated Supabase URL + anon key (gitignored)
+  - Note: Changed from xcconfig to generated Swift file because xcconfig treats `//` in URLs as comments
 - Add: `ios/Unblur/Services/SupabaseClient.swift` — singleton client
 - Add: `ios/Unblur/Models/EpisodeDTO.swift` — Decodable struct for episodes_view
 - Add: `ios/Unblur/Services/EpisodeRepository.swift` — protocol + Supabase implementation
