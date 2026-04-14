@@ -124,9 +124,10 @@ Edge Functions internally use `service_role` to write to the database (bypasses 
 
 Episode list uses cursor-based pagination:
 - **Page size:** 30 episodes per request
-- **Sort:** `publish_date DESC`
-- **Cursor:** `publish_date` of last item in current page
-- **Query:** `select * from episodes where publish_date < :cursor order by publish_date desc limit 30`
+- **Sort:** `publish_date DESC, id DESC`
+- **Cursor:** Composite `(publish_date, id)` of last item in current page — guarantees unique ordering even when multiple episodes share the same timestamp
+- **First page:** `select * from episodes_view order by publish_date desc, id desc limit 30`
+- **Next pages:** `select * from episodes_view where (publish_date, id) < (:cursor_date, :cursor_id) order by publish_date desc, id desc limit 30`
 - **iOS:** Infinite scroll — load next page when user scrolls near bottom
 - **Admin:** Table pagination with page controls
 
