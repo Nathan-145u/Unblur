@@ -8,7 +8,7 @@
 - Manual Intervention: none
 
 ## T007: Project setup + Supabase SDK integration
-- Status: planned
+- Status: done
 - Files: `ios/Unblur.xcodeproj` (SPM dependency), `ios/Unblur/Services/SupabaseClient.swift`, `ios/Config/Supabase.xcconfig`, `ios/Info.plist`, `.gitignore`, `README.md`
 - Done Definition: `supabase-swift` added via SPM. SupabaseClient singleton reads URL + anon key from Info.plist (via xcconfig). xcconfig added to .gitignore. README.md updated: Prerequisites lists `supabase-swift` dependency, Environment Setup documents SUPABASE_URL and SUPABASE_ANON_KEY (where to find values, which file to put them in). App builds without errors.
 - Dependencies: T006
