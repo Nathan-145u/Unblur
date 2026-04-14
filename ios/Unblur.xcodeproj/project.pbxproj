@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		67B000042F84A004005F1CA3 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 67B000032F84A003005F1CA3 /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		67B000012F84A001005F1CA3 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Supabase.xcconfig; path = Config/Supabase.xcconfig; sourceTree = "<group>"; };
 		67A074392F83D2BF005F1CA3 /* Unblur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unblur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -23,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67B000042F84A004005F1CA3 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +38,7 @@
 		67A074302F83D2BF005F1CA3 = {
 			isa = PBXGroup;
 			children = (
+				67B000012F84A001005F1CA3 /* Supabase.xcconfig */,
 				67A0743B2F83D2BF005F1CA3 /* Unblur */,
 				67A0743A2F83D2BF005F1CA3 /* Products */,
 			);
@@ -65,6 +72,7 @@
 			);
 			name = Unblur;
 			packageProductDependencies = (
+				67B000032F84A003005F1CA3 /* Supabase */,
 			);
 			productName = Unblur;
 			productReference = 67A074392F83D2BF005F1CA3 /* Unblur.app */;
@@ -93,6 +101,9 @@
 				Base,
 			);
 			mainGroup = 67A074302F83D2BF005F1CA3;
+				packageReferences = (
+					67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				);
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67A0743A2F83D2BF005F1CA3 /* Products */;
@@ -243,6 +254,7 @@
 		};
 		67A074472F83D2C1005F1CA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B000012F84A001005F1CA3 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -254,6 +266,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -287,6 +300,7 @@
 		};
 		67A074482F83D2C1005F1CA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B000012F84A001005F1CA3 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -298,6 +312,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -351,6 +366,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67B000032F84A003005F1CA3 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67A074312F83D2BF005F1CA3 /* Project object */;
 }
