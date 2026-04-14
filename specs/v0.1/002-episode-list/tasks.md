@@ -22,7 +22,7 @@
 - Manual Intervention: none
 
 ## T009: Duration + date formatters
-- Status: planned
+- Status: done
 - Files: `ios/Unblur/Utilities/DurationFormatter.swift`, `ios/Unblur/Utilities/RelativeDateFormatter.swift`, `ios/UnblurTests/DurationFormatterTests.swift`, `ios/UnblurTests/RelativeDateFormatterTests.swift`
 - Done Definition: Duration formatter handles 0 → "—", <3600 → "Xm", ≥3600 → "Xh Ym". Relative date formatter handles Today/Yesterday/X days ago/Mon DD/Mon DD, YYYY. All test cases pass.
 - Dependencies: none
