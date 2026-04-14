@@ -1,3 +1,3 @@
 # Counters
 
-- T-number: 12
+- T-number: 5
