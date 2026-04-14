@@ -15,7 +15,7 @@
 - Manual Intervention: [HUMAN REQUIRED] Create `ios/Config/Supabase.xcconfig` with actual SUPABASE_URL and SUPABASE_ANON_KEY values from Supabase Dashboard.
 
 ## T008: Episode model + EpisodeService
-- Status: planned
+- Status: done
 - Files: `ios/Unblur/Models/Episode.swift`, `ios/Unblur/Services/EpisodeService.swift`
 - Done Definition: `Episode` struct is Decodable and matches `episodes_view` columns. `EpisodeService` protocol defines `fetchEpisodes(cursor:limit:)`. `SupabaseEpisodeService` implements composite cursor pagination via `.or()` filter. Unit test verifies mock service returns expected data.
 - Dependencies: T007
