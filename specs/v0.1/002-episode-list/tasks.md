@@ -1,7 +1,7 @@
 # Tasks — Episode List
 
 ## T006: Migrate iOS project to ios/ subdirectory
-- Status: for_review
+- Status: done
 - Files: `Unblur/` → `ios/`, `Unblur.xcodeproj`
 - Done Definition: iOS project moved from `Unblur/` to `ios/` per VERSION_PLAN repo structure. Xcode project opens and builds from `ios/` path. All internal references (source files, assets, tests) resolve correctly.
 - Dependencies: none
