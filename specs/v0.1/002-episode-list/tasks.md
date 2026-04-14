@@ -29,7 +29,7 @@
 - Manual Intervention: none
 
 ## T010: EpisodeListViewModel
-- Status: planned
+- Status: done
 - Files: `ios/Unblur/ViewModels/EpisodeListViewModel.swift`, `ios/UnblurTests/EpisodeListViewModelTests.swift`
 - Done Definition: @Observable ViewModel manages LoadState (idle/loading/loaded/error). Supports initial load, pagination (with isLoadingMore guard), pull-to-refresh (resets cursor). Composite cursor updated after each page. hasMore set to false when page < 30 items. Tests cover: initial load success/failure, pagination appends data, refresh resets state, duplicate pagination calls ignored.
 - Dependencies: T008, T009
