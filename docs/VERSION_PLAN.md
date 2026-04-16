@@ -186,16 +186,31 @@ See [SCHEMA.md](./SCHEMA.md) for all database tables, Views, RLS policies, and S
 
 ---
 
-## Version Overview
+## Roadmap
 
 | Version | Theme | Features |
 |---------|-------|----------|
-| v0.1 | Listen | ~~001-rss-sync~~, 002-episode-list, 003-audio-download, 004-audio-player |
+| v0.1 | Listen | 001-rss-sync, 002-episode-list, 003-audio-download, 004-audio-player |
 | v0.2 | Subtitles | 001-transcribe, 002-subtitle-display, 003-admin-transcription, 004-force-upgrade |
 | v0.3 | Translation | 001-translate, 002-bilingual-display, 003-admin-translation |
 | v0.4 | Polish + AI | 001-batch-download, 002-storage-management, 003-ai-qa, 004-admin-full, 005-multiplatform |
 
 Feature specs: `specs/v{version}/{feature}/spec.md`
+
+## Version Status
+
+| Version | Status |
+|---------|--------|
+| v0.1 | in_progress |
+
+## Feature Status
+
+| Feature | Status |
+|---------|--------|
+| v0.1/001-rss-sync | closed |
+| v0.1/002-episode-list | in_progress |
+| v0.1/003-audio-download | in_progress |
+| v0.1/004-audio-player | in_progress |
 
 ---
 
