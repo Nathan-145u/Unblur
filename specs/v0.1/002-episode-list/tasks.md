@@ -36,7 +36,7 @@
 - Manual Intervention: none
 
 ## T011: EpisodeListView + EpisodeRowView
-- Status: planned
+- Status: in_progress
 - Files: `ios/Unblur/Views/EpisodeListView.swift`, `ios/Unblur/Views/EpisodeRowView.swift`, `ios/Unblur/Assets.xcassets` (AccentColor)
 - Done Definition: List displays episodes with artwork (AsyncImage 60×60, placeholder waveform), title (2-line max), relative date, formatted duration. Infinite scroll triggers loadMore at last 5 items. Pull-to-refresh via .refreshable. All states rendered: loading (centered spinner), loaded (list), empty ("No episodes yet"), error ("Unable to load episodes" + retry), offline ("No internet connection" + retry). AccentColor #F28C38 set in Asset Catalog.
 - Dependencies: T010
