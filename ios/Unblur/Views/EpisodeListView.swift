@@ -58,6 +58,11 @@ struct EpisodeListView: View {
 
     private var episodeList: some View {
         List {
+            if viewModel.refreshFailed {
+                refreshErrorBanner
+                    .listRowInsets(EdgeInsets())
+                    .listRowSeparator(.hidden)
+            }
             ForEach(Array(viewModel.episodes.enumerated()), id: \.element.id) { index, episode in
                 EpisodeRowView(episode: episode)
                     .onAppear {
@@ -71,12 +76,49 @@ struct EpisodeListView: View {
                     Spacer()
                 }
                 .listRowSeparator(.hidden)
+            } else if viewModel.paginationFailed {
+                paginationErrorRow
+                    .listRowSeparator(.hidden)
             }
         }
         .listStyle(.plain)
         .refreshable {
             await viewModel.refresh()
         }
+    }
+
+    private var refreshErrorBanner: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "exclamationmark.triangle.fill")
+            Text("Refresh failed")
+                .font(.subheadline)
+            Spacer()
+            Button("Dismiss") {
+                Task { await viewModel.refresh() }
+            }
+            .font(.subheadline)
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .background(Color.red.opacity(0.12))
+        .foregroundStyle(.red)
+    }
+
+    private var paginationErrorRow: some View {
+        Button {
+            Task { await viewModel.loadMore() }
+        } label: {
+            HStack {
+                Spacer()
+                Image(systemName: "arrow.clockwise")
+                Text("Unable to load more. Tap to retry")
+                    .font(.subheadline)
+                Spacer()
+            }
+            .padding(.vertical, 12)
+            .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.plain)
     }
 
     private var errorView: some View {
@@ -111,6 +153,7 @@ struct EpisodeListView: View {
     }
 
     private func handleRowAppear(at index: Int) {
+        guard viewModel.hasMore, !viewModel.isLoadingMore, !viewModel.paginationFailed else { return }
         let threshold = max(viewModel.episodes.count - 5, 0)
         if index >= threshold {
             Task { await viewModel.loadMore() }
