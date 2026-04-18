@@ -14,6 +14,8 @@ final class EpisodeListViewModel {
     private(set) var loadState: LoadState = .idle
     private(set) var hasMore = true
     private(set) var isLoadingMore = false
+    private(set) var paginationFailed = false
+    private(set) var refreshFailed = false
 
     private let service: any EpisodeService
     private let pageSize: Int
@@ -27,6 +29,8 @@ final class EpisodeListViewModel {
     func loadEpisodes() async {
         loadState = .loading
         cursor = nil
+        paginationFailed = false
+        refreshFailed = false
 
         do {
             episodes = try await fetchPage(cursor: nil)
@@ -44,21 +48,25 @@ final class EpisodeListViewModel {
         do {
             let page = try await fetchPage(cursor: cursor)
             episodes.append(contentsOf: page)
+            paginationFailed = false
         } catch {
-            // Pagination error: keep existing data
+            paginationFailed = true
         }
 
         isLoadingMore = false
     }
 
     func refresh() async {
+        let previousCursor = cursor
         cursor = nil
 
         do {
             episodes = try await fetchPage(cursor: nil)
             loadState = .loaded
+            refreshFailed = false
         } catch {
-            // Refresh error: keep existing data
+            cursor = previousCursor
+            refreshFailed = true
         }
     }
 

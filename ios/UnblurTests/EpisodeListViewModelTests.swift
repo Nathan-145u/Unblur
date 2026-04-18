@@ -129,3 +129,86 @@ func loadMoreNoop() async {
     await vm.loadMore()
     #expect(vm.episodes.count == 5)
 }
+
+final class FlakyEpisodeService: EpisodeService, @unchecked Sendable {
+    private let lock = NSLock()
+    private var calls = 0
+    private let firstResult: [Episode]
+    private let laterError: Error
+
+    init(firstResult: [Episode], laterError: Error) {
+        self.firstResult = firstResult
+        self.laterError = laterError
+    }
+
+    func fetchEpisodes(cursor: (Date, UUID)?, limit: Int) async throws -> [Episode] {
+        lock.lock()
+        calls += 1
+        let n = calls
+        lock.unlock()
+        if n == 1 { return firstResult }
+        throw laterError
+    }
+}
+
+@Test("Pagination failure sets paginationFailed and keeps existing data")
+@MainActor
+func paginationFailureSignalsBanner() async {
+    let first = makeEpisodes(count: 30)
+    let service = FlakyEpisodeService(firstResult: first, laterError: URLError(.badServerResponse))
+    let vm = EpisodeListViewModel(service: service, pageSize: 30)
+
+    await vm.loadEpisodes()
+    #expect(vm.episodes.count == 30)
+    #expect(vm.paginationFailed == false)
+
+    await vm.loadMore()
+
+    #expect(vm.episodes.count == 30)
+    #expect(vm.paginationFailed == true)
+    #expect(vm.loadState == .loaded)
+}
+
+@Test("Refresh failure sets refreshFailed and keeps existing data")
+@MainActor
+func refreshFailureSignalsBanner() async {
+    let first = makeEpisodes(count: 5)
+    let service = FlakyEpisodeService(firstResult: first, laterError: URLError(.notConnectedToInternet))
+    let vm = EpisodeListViewModel(service: service, pageSize: 30)
+
+    await vm.loadEpisodes()
+    #expect(vm.episodes.count == 5)
+
+    await vm.refresh()
+
+    #expect(vm.episodes.count == 5)
+    #expect(vm.refreshFailed == true)
+    #expect(vm.loadState == .loaded)
+}
+
+@Test("Successful loadMore clears paginationFailed")
+@MainActor
+func paginationSuccessClearsFailure() async {
+    let episodes = makeEpisodes(count: 50)
+    let service = MockEpisodeService(episodes: episodes)
+    let vm = EpisodeListViewModel(service: service, pageSize: 30)
+
+    await vm.loadEpisodes()
+    await vm.loadMore()
+
+    #expect(vm.paginationFailed == false)
+    #expect(vm.episodes.count == 50)
+}
+
+@Test("Successful refresh clears refreshFailed")
+@MainActor
+func refreshSuccessClearsFailure() async {
+    let episodes = makeEpisodes(count: 5)
+    let service = MockEpisodeService(episodes: episodes)
+    let vm = EpisodeListViewModel(service: service)
+
+    await vm.loadEpisodes()
+    await vm.refresh()
+
+    #expect(vm.refreshFailed == false)
+}
