@@ -1,6 +1,18 @@
 import SwiftUI
+import Nuke
+import NukeUI
 
 struct EpisodeRowView: View {
+    private static let artworkDisplayPoints: CGFloat = 60
+    private static let artworkTargetPixels: CGFloat = artworkDisplayPoints * 2
+    private static let artworkProcessors: [any ImageProcessing] = [
+        ImageProcessors.Resize(
+            size: CGSize(width: artworkTargetPixels, height: artworkTargetPixels),
+            contentMode: .aspectFill,
+            crop: true
+        ),
+    ]
+
     let episode: Episode
 
     var body: some View {
@@ -31,18 +43,20 @@ struct EpisodeRowView: View {
     @ViewBuilder
     private var artwork: some View {
         let url = episode.artworkUrl.flatMap(URL.init(string:))
-        AsyncImage(url: url) { phase in
-            switch phase {
-            case .success(let image):
-                image
-                    .resizable()
-                    .scaledToFill()
-            default:
+        LazyImage(request: artworkRequest(for: url)) { state in
+            if let image = state.image {
+                image.resizable().scaledToFill()
+            } else {
                 artworkPlaceholder
             }
         }
-        .frame(width: 60, height: 60)
+        .frame(width: Self.artworkDisplayPoints, height: Self.artworkDisplayPoints)
         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    private func artworkRequest(for url: URL?) -> ImageRequest? {
+        guard let url else { return nil }
+        return ImageRequest(url: url, processors: Self.artworkProcessors)
     }
 
     private var artworkPlaceholder: some View {
