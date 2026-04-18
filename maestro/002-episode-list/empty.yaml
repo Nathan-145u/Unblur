@@ -1,0 +1,11 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Empty State
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "empty"
+    stopApp: true
+- assertVisible:
+    id: "emptyView"
+- assertVisible: "No episodes yet"
+- assertVisible: "Pull down to refresh"

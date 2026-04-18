@@ -40,6 +40,7 @@ struct EpisodeListView: View {
     private var loadingView: some View {
         ProgressView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityIdentifier("loadingView")
     }
 
     private var emptyView: some View {
@@ -54,6 +55,7 @@ struct EpisodeListView: View {
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityIdentifier("emptyView")
     }
 
     private var episodeList: some View {
@@ -102,6 +104,7 @@ struct EpisodeListView: View {
         .padding(.vertical, 8)
         .background(Color.red.opacity(0.12))
         .foregroundStyle(.red)
+        .accessibilityIdentifier("refreshErrorBanner")
     }
 
     private var paginationErrorRow: some View {
@@ -119,13 +122,15 @@ struct EpisodeListView: View {
             .foregroundStyle(.secondary)
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("paginationErrorRow")
     }
 
     private var errorView: some View {
         retryState(
             symbol: "wifi.exclamationmark",
             title: "Unable to load episodes",
-            buttonTitle: "Tap to retry"
+            buttonTitle: "Tap to retry",
+            containerId: "errorView"
         )
     }
 
@@ -133,11 +138,12 @@ struct EpisodeListView: View {
         retryState(
             symbol: "wifi.slash",
             title: "No internet connection",
-            buttonTitle: "Tap to retry"
+            buttonTitle: "Tap to retry",
+            containerId: "offlineView"
         )
     }
 
-    private func retryState(symbol: String, title: String, buttonTitle: String) -> some View {
+    private func retryState(symbol: String, title: String, buttonTitle: String, containerId: String) -> some View {
         VStack(spacing: 16) {
             Image(systemName: symbol)
                 .font(.system(size: 48))
@@ -150,6 +156,7 @@ struct EpisodeListView: View {
             .buttonStyle(.borderedProminent)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityIdentifier(containerId)
     }
 
     private func handleRowAppear(at index: Int) {

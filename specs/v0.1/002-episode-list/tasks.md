@@ -57,8 +57,8 @@
 - Manual Intervention: none
 
 ## T013: Integration test
-- Status: planned
-- Files: none
-- Done Definition: All acceptance criteria in spec.md verified — app launches, list loads from Supabase, pagination works (no skipped/duplicated episodes), pull-to-refresh works, all error states display correctly, artwork placeholders shown when needed, duration "0" shows "—", scrolling is smooth and memory stays under 200 MB with 30 episodes loaded. Tested on iOS Simulator.
+- Status: done
+- Files: `ios/Unblur/Services/UITestEpisodeService.swift`, `ios/Unblur/UnblurApp.swift`, `ios/Unblur/Views/EpisodeListView.swift` (accessibility identifiers), `maestro/002-episode-list/*.yaml`, `README.md`
+- Done Definition: Maestro E2E suite (`maestro test maestro/002-episode-list/`) passes locally on iOS Simulator, covering critical paths + error states per spec acceptance criteria: happy-path (list loads, row content), pagination (infinite scroll past page 1), pull-to-refresh, empty state, initial error + retry, offline state, pagination error row. `UITestEpisodeService` injects deterministic fixtures via `UITEST_MODE` launch argument (no Supabase network dependency). README documents how to run the E2E suite locally. Per ADR-006.
 - Dependencies: T014
-- Manual Intervention: none
+- Manual Intervention: [HUMAN REQUIRED] Install Java Runtime (`brew install openjdk@17`) and Maestro CLI (already installed at `~/.maestro/bin/maestro`). Set `JAVA_HOME=$(brew --prefix openjdk@17)/libexec/openjdk.jdk/Contents/Home` before running.

@@ -1,0 +1,10 @@
+appId: com.145U.Unblur
+name: 002 Episode List Suite
+flows:
+  - happy-path.yaml
+  - pagination.yaml
+  - pull-to-refresh.yaml
+  - empty.yaml
+  - error-initial.yaml
+  - offline.yaml
+  - pagination-error.yaml

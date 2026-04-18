@@ -1,0 +1,13 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Pagination Error
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "fail_pagination"
+    stopApp: true
+- assertVisible: "UITest Episode #1"
+- scrollUntilVisible:
+    element: "Unable to load more. Tap to retry"
+    direction: DOWN
+    timeout: 30000
+- assertVisible: "Unable to load more. Tap to retry"
