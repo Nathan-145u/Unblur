@@ -57,7 +57,7 @@
 - Manual Intervention: none
 
 ## T013: Integration test
-- Status: in_progress
+- Status: done
 - Files: `ios/Unblur/Services/UITestEpisodeService.swift`, `ios/Unblur/UnblurApp.swift`, `ios/Unblur/Views/EpisodeListView.swift` (accessibility identifiers), `maestro/002-episode-list/*.yaml`, `README.md`
 - Done Definition: Maestro E2E suite (`maestro test maestro/002-episode-list/`) passes locally on iOS Simulator, covering critical paths + error states per spec acceptance criteria: happy-path (list loads, row content), pagination (infinite scroll past page 1), pull-to-refresh, empty state, initial error + retry, offline state, pagination error row. `UITestEpisodeService` injects deterministic fixtures via `UITEST_MODE` launch argument (no Supabase network dependency). README documents how to run the E2E suite locally. Per ADR-006.
 - Dependencies: T014
