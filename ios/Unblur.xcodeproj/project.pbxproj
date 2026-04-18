@@ -10,9 +10,19 @@
 		67B000042F84A004005F1CA3 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 67B000032F84A003005F1CA3 /* Supabase */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67A074312F83D2BF005F1CA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67A074382F83D2BF005F1CA3;
+			remoteInfo = Unblur;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		67B000012F84A001005F1CA3 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Supabase.xcconfig; path = Config/Supabase.xcconfig; sourceTree = "<group>"; };
 		67A074392F83D2BF005F1CA3 /* Unblur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unblur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67B000012F84A001005F1CA3 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Supabase.xcconfig; path = Config/Supabase.xcconfig; sourceTree = "<group>"; };
 		67C000012F84B001005F1CA3 /* UnblurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnblurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -28,24 +38,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXContainerItemProxy section */
-		67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 67A074312F83D2BF005F1CA3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 67A074382F83D2BF005F1CA3;
-			remoteInfo = Unblur;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXTargetDependency section */
-		67C0000B2F84B00B005F1CA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 67A074382F83D2BF005F1CA3 /* Unblur */;
-			targetProxy = 67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		67A074362F83D2BF005F1CA3 /* Frameworks */ = {
@@ -161,10 +153,10 @@
 				Base,
 			);
 			mainGroup = 67A074302F83D2BF005F1CA3;
-				packageReferences = (
-					67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */,
-				);
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67A0743A2F83D2BF005F1CA3 /* Products */;
 			projectDirPath = "";
@@ -209,6 +201,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67C0000B2F84B00B005F1CA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67A074382F83D2BF005F1CA3 /* Unblur */;
+			targetProxy = 67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		67A074442F83D2C1005F1CA3 /* Debug */ = {
