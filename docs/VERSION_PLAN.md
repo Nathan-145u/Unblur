@@ -208,7 +208,7 @@ Feature specs: `specs/v{version}/{feature}/spec.md`
 | Feature | Status |
 |---------|--------|
 | v0.1/001-rss-sync | closed |
-| v0.1/002-episode-list | in_progress |
+| v0.1/002-episode-list | closed |
 | v0.1/003-audio-download | in_progress |
 | v0.1/004-audio-player | in_progress |
 
