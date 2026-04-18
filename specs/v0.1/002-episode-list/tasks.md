@@ -43,7 +43,7 @@
 - Manual Intervention: none
 
 ## T012: App entry point cleanup
-- Status: in_progress
+- Status: for_review
 - Files: `ios/Unblur/UnblurApp.swift`
 - Done Definition: SwiftData/Item references removed. App root view is EpisodeListView with ViewModel injected. App launches and displays episode list from Supabase. Item.swift and ContentView.swift deleted.
 - Dependencies: T011
