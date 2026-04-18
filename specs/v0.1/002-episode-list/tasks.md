@@ -57,7 +57,7 @@
 - Manual Intervention: none
 
 ## T013: Integration test
-- Status: planned
+- Status: in_progress
 - Files: none
 - Done Definition: All acceptance criteria in spec.md verified — app launches, list loads from Supabase, pagination works (no skipped/duplicated episodes), pull-to-refresh works, all error states display correctly, artwork placeholders shown when needed, duration "0" shows "—", scrolling is smooth and memory stays under 200 MB with 30 episodes loaded. Tested on iOS Simulator.
 - Dependencies: T014
