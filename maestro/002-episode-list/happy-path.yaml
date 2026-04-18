@@ -1,0 +1,10 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Happy Path
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "happy"
+    stopApp: true
+- assertVisible: "Unblur"
+- assertVisible: "UITest Episode #1"
+- assertVisible: "UITest Episode #2"

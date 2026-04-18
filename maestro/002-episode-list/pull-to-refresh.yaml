@@ -1,0 +1,13 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Pull to Refresh
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "happy"
+    stopApp: true
+- assertVisible: "UITest Episode #1"
+- swipe:
+    start: "50%, 30%"
+    end: "50%, 90%"
+    duration: 600
+- assertVisible: "UITest Episode #1"

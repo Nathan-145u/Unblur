@@ -1,0 +1,11 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Offline State
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "offline"
+    stopApp: true
+- assertVisible:
+    id: "offlineView"
+- assertVisible: "No internet connection"
+- assertVisible: "Tap to retry"

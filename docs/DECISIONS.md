@@ -248,3 +248,37 @@
 - **Grok 4.1 ($0.20/$0.50):** Chinese language support is weakest among candidates. Not suitable for this use case.
 
 **Future plan:** When subscription is added (v0.5+), upgrade Q&A to a stronger model (Claude Sonnet or similar) for paying users. DeepSeek remains as the free tier fallback.
+
+---
+
+## ADR-009: iOS Image Loading — Nuke
+
+**Status:** Accepted
+**Date:** 2026-04-18
+
+**Context:** The episode list (002) renders 60×60pt artwork thumbnails for every row. Initial implementation used SwiftUI's built-in `AsyncImage`, which caused ~700 MB memory use with only 30 episodes loaded and visible scroll stutter. Root cause: `AsyncImage` decodes images at their full source resolution (podcast artwork is typically 1400×1400 or 3000×3000), has no persistent cache, and decodes on the main thread.
+
+**Decision:** Adopt [Nuke](https://github.com/kean/Nuke) via SPM. Use `NukeUI.LazyImage` with `ImageProcessors.Resize` to downsample artwork to 2× the display size (120×120px) before decoding.
+
+**Pros:**
+- Built-in downsampling via `ImageProcessors.Resize` — reduces per-image memory by ~100×
+- Memory + disk cache with automatic LRU eviction
+- Off-main-thread decoding — keeps scrolling at 60fps
+- Automatic task cancellation when cells are recycled during fast scrolling
+- Concurrent download limiting out of the box
+- Swift-first API, `Sendable` / actor-correct under Swift 6 strict concurrency
+- `LazyImage` is a drop-in SwiftUI view that mirrors `AsyncImage`'s API
+- Actively maintained, ~6k stars, small footprint (~500 KB)
+
+**Cons:**
+- Adds a third-party SPM dependency
+- One more library to track for security / maintenance (mitigated by Nuke's stable release cadence)
+
+**Alternatives considered:**
+- **Hand-rolled image loader (URLSession + CGImageSource downsample + NSCache):** Feasible in ~80-120 LOC, but has many subtle correctness traps — task cancellation on cell recycle, Swift 6 Sendable correctness, concurrent download limiting, decode prioritization. Rebuilding a solved problem violates the project's "Research & Reuse Mandatory" principle.
+- **Kingfisher:** Equally capable and more popular (~23k stars), but heavier (~1.5 MB), older API style, and includes GIF/animation features unused here. Nuke is a cleaner fit for SwiftUI + Swift 6.
+- **Keep `AsyncImage` and only add caching via `URLCache`:** Solves repeated downloads but not the memory or main-thread decoding problem. Rejected — doesn't address the root cause.
+
+**Risks & mitigations:**
+- Dependency abandonment: Nuke has been actively maintained since 2015. If abandoned, swap with Kingfisher is straightforward (both wrap the same SwiftUI + image loading contract). The call sites are isolated to `EpisodeRowView`.
+- Cache growth: Nuke's default disk cache cap (150 MB) is well below iOS storage pressure thresholds. Monitor if the app adds other image sources later.

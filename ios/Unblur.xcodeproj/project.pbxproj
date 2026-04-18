@@ -6,8 +6,26 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		67B000042F84A004005F1CA3 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 67B000032F84A003005F1CA3 /* Supabase */; };
+		67D000012F85A001005F1CA3 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 67D000042F85A004005F1CA3 /* Nuke */; };
+		67D000022F85A002005F1CA3 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 67D000052F85A005005F1CA3 /* NukeUI */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67A074312F83D2BF005F1CA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 67A074382F83D2BF005F1CA3;
+			remoteInfo = Unblur;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		67A074392F83D2BF005F1CA3 /* Unblur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unblur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		67B000012F84A001005F1CA3 /* Supabase.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Supabase.xcconfig; path = Config/Supabase.xcconfig; sourceTree = "<group>"; };
+		67C000012F84B001005F1CA3 /* UnblurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnblurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +34,25 @@
 			path = Unblur;
 			sourceTree = "<group>";
 		};
+		67C000022F84B002005F1CA3 /* UnblurTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = UnblurTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		67A074362F83D2BF005F1CA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				67B000042F84A004005F1CA3 /* Supabase in Frameworks */,
+				67D000012F85A001005F1CA3 /* Nuke in Frameworks */,
+				67D000022F85A002005F1CA3 /* NukeUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67C000052F84B005005F1CA3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,7 +65,9 @@
 		67A074302F83D2BF005F1CA3 = {
 			isa = PBXGroup;
 			children = (
+				67B000012F84A001005F1CA3 /* Supabase.xcconfig */,
 				67A0743B2F83D2BF005F1CA3 /* Unblur */,
+				67C000022F84B002005F1CA3 /* UnblurTests */,
 				67A0743A2F83D2BF005F1CA3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				67A074392F83D2BF005F1CA3 /* Unblur.app */,
+				67C000012F84B001005F1CA3 /* UnblurTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,10 +101,36 @@
 			);
 			name = Unblur;
 			packageProductDependencies = (
+				67B000032F84A003005F1CA3 /* Supabase */,
+				67D000042F85A004005F1CA3 /* Nuke */,
+				67D000052F85A005005F1CA3 /* NukeUI */,
 			);
 			productName = Unblur;
 			productReference = 67A074392F83D2BF005F1CA3 /* Unblur.app */;
 			productType = "com.apple.product-type.application";
+		};
+		67C000032F84B003005F1CA3 /* UnblurTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 67C000092F84B009005F1CA3 /* Build configuration list for PBXNativeTarget "UnblurTests" */;
+			buildPhases = (
+				67C000042F84B004005F1CA3 /* Sources */,
+				67C000052F84B005005F1CA3 /* Frameworks */,
+				67C000062F84B006005F1CA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67C0000B2F84B00B005F1CA3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				67C000022F84B002005F1CA3 /* UnblurTests */,
+			);
+			name = UnblurTests;
+			packageProductDependencies = (
+			);
+			productName = UnblurTests;
+			productReference = 67C000012F84B001005F1CA3 /* UnblurTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -83,6 +145,10 @@
 					67A074382F83D2BF005F1CA3 = {
 						CreatedOnToolsVersion = 26.3;
 					};
+					67C000032F84B003005F1CA3 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 67A074382F83D2BF005F1CA3;
+					};
 				};
 			};
 			buildConfigurationList = 67A074342F83D2BF005F1CA3 /* Build configuration list for PBXProject "Unblur" */;
@@ -94,18 +160,30 @@
 			);
 			mainGroup = 67A074302F83D2BF005F1CA3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				67D000032F85A003005F1CA3 /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 67A0743A2F83D2BF005F1CA3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				67A074382F83D2BF005F1CA3 /* Unblur */,
+				67C000032F84B003005F1CA3 /* UnblurTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		67A074372F83D2BF005F1CA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		67C000062F84B006005F1CA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +200,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		67C000042F84B004005F1CA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		67C0000B2F84B00B005F1CA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 67A074382F83D2BF005F1CA3 /* Unblur */;
+			targetProxy = 67C0000A2F84B00A005F1CA3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		67A074442F83D2C1005F1CA3 /* Debug */ = {
@@ -243,6 +336,7 @@
 		};
 		67A074472F83D2C1005F1CA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B000012F84A001005F1CA3 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -254,6 +348,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -287,6 +382,7 @@
 		};
 		67A074482F83D2C1005F1CA3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B000012F84A001005F1CA3 /* Supabase.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -298,6 +394,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -329,6 +426,56 @@
 			};
 			name = Release;
 		};
+		67C000072F84B007005F1CA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L277Y76D3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.145U.UnblurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unblur.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unblur";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Debug;
+		};
+		67C000082F84B008005F1CA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L277Y76D3W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.145U.UnblurTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unblur.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unblur";
+				XROS_DEPLOYMENT_TARGET = 26.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -350,7 +497,53 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		67C000092F84B009005F1CA3 /* Build configuration list for PBXNativeTarget "UnblurTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				67C000072F84B007005F1CA3 /* Debug */,
+				67C000082F84B008005F1CA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		67D000032F85A003005F1CA3 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		67B000032F84A003005F1CA3 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67B000022F84A002005F1CA3 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		67D000042F85A004005F1CA3 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67D000032F85A003005F1CA3 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		67D000052F85A005005F1CA3 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67D000032F85A003005F1CA3 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 67A074312F83D2BF005F1CA3 /* Project object */;
 }

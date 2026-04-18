@@ -1,0 +1,23 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Pagination
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "happy"
+    stopApp: true
+- assertVisible:
+    id: "episodeRow-UITest Episode #1"
+- scrollUntilVisible:
+    element:
+      id: "episodeRow-UITest Episode #35"
+    direction: DOWN
+    timeout: 30000
+    visibilityPercentage: 50
+- assertVisible:
+    id: "episodeRow-UITest Episode #35"
+- scrollUntilVisible:
+    element:
+      id: "episodeRow-UITest Episode #45"
+    direction: DOWN
+    timeout: 30000
+    visibilityPercentage: 50
