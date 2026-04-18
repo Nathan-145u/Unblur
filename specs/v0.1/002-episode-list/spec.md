@@ -35,7 +35,7 @@
 The episode list is the app's root screen. It displays episodes sorted by publish date (newest first).
 
 **Row layout:**
-- **Leading:** Episode artwork (`AsyncImage`, 60×60pt, corner radius 8pt, placeholder: SF Symbol `waveform`)
+- **Leading:** Episode artwork (async image loader with downsampling to 2× display size and in-memory caching, 60×60pt, corner radius 8pt, placeholder: SF Symbol `waveform`)
 - **Title:** Episode title (primary text, 2-line max, truncated)
 - **Subtitle line:** Publish date (relative format: "Today", "Yesterday", "3 days ago", etc.) + duration (formatted: `12m` or `1h 5m`)
 - **No trailing accessory** (no chevron, no download button — those come in 003/004)
@@ -135,6 +135,7 @@ Minutes are always rounded down (floor). Zero minutes after hours still displaye
 - [ ] Pull-to-refresh error does not clear existing loaded episodes
 - [ ] Artwork placeholder shown when artwork URL is nil or image fails to load
 - [ ] Duration "0" displays as "—"
+- [ ] Scrolling through 100+ episodes remains smooth (no visible stutter); memory stays under 200 MB with 30 episodes loaded
 
 ## 6. Critical Path
 

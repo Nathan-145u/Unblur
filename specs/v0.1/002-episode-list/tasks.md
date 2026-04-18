@@ -49,9 +49,16 @@
 - Dependencies: T011
 - Manual Intervention: none
 
+## T014: Artwork image loader (downsample + cache)
+- Status: planned
+- Files: `ios/Unblur.xcodeproj` (SPM dependency), `ios/Unblur/Views/EpisodeRowView.swift`, `docs/DECISIONS.md`
+- Done Definition: Nuke added via SPM. `EpisodeRowView` replaces `AsyncImage` with `NukeUI.LazyImage` configured with `ImageProcessors.Resize` at 120×120px (2× of 60pt display). Memory with 30 episodes loaded stays under 200 MB (baseline ~700 MB with `AsyncImage`). Scrolling through 100+ episodes is smooth — no main-thread image decoding. Artwork placeholder still shown when URL is nil or load fails. DECISIONS.md records the Nuke choice and reasoning.
+- Dependencies: T012
+- Manual Intervention: none
+
 ## T013: Integration test
 - Status: planned
 - Files: none
-- Done Definition: All acceptance criteria in spec.md verified — app launches, list loads from Supabase, pagination works (no skipped/duplicated episodes), pull-to-refresh works, all error states display correctly, artwork placeholders shown when needed, duration "0" shows "—". Tested on iOS Simulator.
-- Dependencies: T012
+- Done Definition: All acceptance criteria in spec.md verified — app launches, list loads from Supabase, pagination works (no skipped/duplicated episodes), pull-to-refresh works, all error states display correctly, artwork placeholders shown when needed, duration "0" shows "—", scrolling is smooth and memory stays under 200 MB with 30 episodes loaded. Tested on iOS Simulator.
+- Dependencies: T014
 - Manual Intervention: none
