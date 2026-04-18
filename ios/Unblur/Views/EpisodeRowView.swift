@@ -32,6 +32,8 @@ struct EpisodeRowView: View {
             Spacer(minLength: 0)
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("episodeRow-\(episode.title)")
     }
 
     private var subtitle: String {

@@ -1,0 +1,14 @@
+appId: com.145U.Unblur
+name: 002 Episode List — Initial Error + Retry
+---
+- launchApp:
+    arguments:
+      UITEST_MODE: "error_initial"
+    stopApp: true
+- assertVisible:
+    id: "errorView"
+- assertVisible: "Unable to load episodes"
+- assertVisible: "Tap to retry"
+- tapOn: "Tap to retry"
+- assertVisible:
+    id: "errorView"
